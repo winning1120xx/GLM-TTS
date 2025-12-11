@@ -68,7 +68,7 @@ def get_special_token_ids(tokenize_fn):
             raise AssertionError(
                 f"Token '{k}' ({v}) ID {__ids[0]} is smaller than endoftext ID {endoftext_id}"
             )
-        print("k: ", k, "v: ", v, "__ids: ", __ids)
+
         special_token_ids[k] = __ids[0]
 
     return special_token_ids
@@ -396,7 +396,7 @@ def load_models(use_phoneme=False, sample_rate=24000):
         llama_cfg_path=os.path.join(llama_path, "config.json"), mode="PRETRAIN"
     )
     llm.llama = LlamaForCausalLM.from_pretrained(
-        llama_path, torch_dtype=torch.float32
+        llama_path, dtype=torch.float32
     ).to(DEVICE)
 
     llm.llama_embedding = llm.llama.model.embed_tokens
